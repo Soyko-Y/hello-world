@@ -1,32 +1,35 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Prop, h, State, Event, EventEmitter, Listen } from '@stencil/core';
 
+export interface AcknowledgeEvent {
+  when: Date;
+}
 @Component({
   tag: 'my-component',
   styleUrl: 'my-component.css',
-  shadow: true,
+  scoped: true
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
-
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  @Prop() text: string = "Hello world!!";
+  @Prop() kind: "info" | "success" | "error" = "info";
+  @State() acknowledged: boolean = false;
+  @Event() acknowledge: EventEmitter;
+  
+  @Listen("click")
+  handleClick() {
+    this.acknowledged = true;
+    this.acknowledge.emit({
+      when: new Date()
+    });
   }
 
+  getCSSClass = () => this.kind + (this.acknowledged ? " acknowledged" : "");
+
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return (
+      <p class={this.getCSSClass()}>
+        {this.text}
+        <span>Acknowledge</span>
+      </p>
+    )
   }
 }
