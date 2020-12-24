@@ -5,11 +5,16 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { News } from "./components/my-add-news/my-add-news";
 import { TabActivateEvent } from "./components/my-tabs/my-tab";
 export namespace Components {
+    interface MyAddNews {
+    }
     interface MyComponent {
         "kind": "info" | "success" | "error";
         "text": string;
+    }
+    interface MyNews {
     }
     interface MyTab {
         "active": boolean;
@@ -20,11 +25,23 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLMyAddNewsElement extends Components.MyAddNews, HTMLStencilElement {
+    }
+    var HTMLMyAddNewsElement: {
+        prototype: HTMLMyAddNewsElement;
+        new (): HTMLMyAddNewsElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLMyNewsElement extends Components.MyNews, HTMLStencilElement {
+    }
+    var HTMLMyNewsElement: {
+        prototype: HTMLMyNewsElement;
+        new (): HTMLMyNewsElement;
     };
     interface HTMLMyTabElement extends Components.MyTab, HTMLStencilElement {
     }
@@ -39,16 +56,23 @@ declare global {
         new (): HTMLMyTabsElement;
     };
     interface HTMLElementTagNameMap {
+        "my-add-news": HTMLMyAddNewsElement;
         "my-component": HTMLMyComponentElement;
+        "my-news": HTMLMyNewsElement;
         "my-tab": HTMLMyTabElement;
         "my-tabs": HTMLMyTabsElement;
     }
 }
 declare namespace LocalJSX {
+    interface MyAddNews {
+        "onNewsAdded"?: (event: CustomEvent<News>) => void;
+    }
     interface MyComponent {
         "kind"?: "info" | "success" | "error";
         "onAcknowledge"?: (event: CustomEvent<any>) => void;
         "text"?: string;
+    }
+    interface MyNews {
     }
     interface MyTab {
         "active"?: boolean;
@@ -59,7 +83,9 @@ declare namespace LocalJSX {
         "activeTab"?: string;
     }
     interface IntrinsicElements {
+        "my-add-news": MyAddNews;
         "my-component": MyComponent;
+        "my-news": MyNews;
         "my-tab": MyTab;
         "my-tabs": MyTabs;
     }
@@ -68,7 +94,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "my-add-news": LocalJSX.MyAddNews & JSXBase.HTMLAttributes<HTMLMyAddNewsElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-news": LocalJSX.MyNews & JSXBase.HTMLAttributes<HTMLMyNewsElement>;
             "my-tab": LocalJSX.MyTab & JSXBase.HTMLAttributes<HTMLMyTabElement>;
             "my-tabs": LocalJSX.MyTabs & JSXBase.HTMLAttributes<HTMLMyTabsElement>;
         }
