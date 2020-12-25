@@ -1,41 +1,32 @@
-import { Component, h, State, Event, EventEmitter } from '@stencil/core';
-
-export interface News {
-  id: string;
-  title: string;
-  body: string;
-}
+import { Component, h, State, Event, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
   tag: 'my-add-news',
   styleUrl: 'my-add-news.css'
 })
 export class MyAddNews {
-  @State() news: News;
+  @Prop() title: string;
+  @Prop() body: string;
   
-  @Event() newsAdded: EventEmitter<News>;
+  @Event() newsAdded: EventEmitter;
 
   newsAddedHandler(e) {
     e.preventDefault()
-    this.news.id = Date.now().toString();
-    this.newsAdded.emit(this.news)
-    // this.news.title = this.news.body = "";
+    const news = {
+      id: Date.now().toString(),
+      title: this.title,
+      body: this.body
+    };
+    this.newsAdded.emit(news);
+    this.title = this.body = "";
   }
 
   handleChangeTitle(event) {
-    this.news.title = event.target.value;
+    this.title = event.target.value;
   }
 
   handleChangeBody(event) {
-    this.news.body = event.target.value;
-  }
-  
-  componentWillLoad() {
-    this.news = {id: "", title: "", body: ""};
-  }
-
-  componentDidRender() {
-    
+    this.body = event.target.value;
   }
 
   render() {
@@ -43,11 +34,11 @@ export class MyAddNews {
       <form onSubmit={(e) => this.newsAddedHandler(e)}>
       <label>
         Title:
-        <input type="text" value={this.news.title} onInput={(event) => this.handleChangeTitle(event)} />
+        <input type="text" value={this.title} onInput={(event) => this.handleChangeTitle(event)} />
       </label>
       <label>
         Content:
-        <input type="text" value={this.news.body} onInput={(event) => this.handleChangeBody(event)} />
+        <input type="text" value={this.body} onInput={(event) => this.handleChangeBody(event)} />
       </label>
       <button type="submit">Submit</button>
     </form>

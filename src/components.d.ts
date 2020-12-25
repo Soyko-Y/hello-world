@@ -5,16 +5,19 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { News } from "./components/my-add-news/my-add-news";
+import { News } from "./components/my-news/my-news";
 import { TabActivateEvent } from "./components/my-tabs/my-tab";
 export namespace Components {
     interface MyAddNews {
+        "body": string;
+        "title": string;
     }
     interface MyComponent {
         "kind": "info" | "success" | "error";
         "text": string;
     }
     interface MyNews {
+        "newsList": Array<News>;
     }
     interface MyTab {
         "active": boolean;
@@ -65,7 +68,9 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MyAddNews {
-        "onNewsAdded"?: (event: CustomEvent<News>) => void;
+        "body"?: string;
+        "onNewsAdded"?: (event: CustomEvent<any>) => void;
+        "title"?: string;
     }
     interface MyComponent {
         "kind"?: "info" | "success" | "error";
@@ -73,6 +78,7 @@ declare namespace LocalJSX {
         "text"?: string;
     }
     interface MyNews {
+        "newsList"?: Array<News>;
     }
     interface MyTab {
         "active"?: boolean;

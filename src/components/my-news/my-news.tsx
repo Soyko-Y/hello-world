@@ -1,36 +1,28 @@
 import { Component, h, State, Listen, Prop } from '@stencil/core';
 
-import { News } from '../my-add-news/my-add-news'
+export interface News {
+  id: string;
+  title: string;
+  body: string;
+}
 
 @Component({
   tag: 'my-news',
   styleUrl: 'my-news.css'
 })
 export class MyNews {
-  @State() newsList: Array<News> = [{id: '1', title: 'title', body: 'body'}, {id: '2', title: 'qwerty', body: 'asdfg'}];
-  // @Prop({mutable: true}) news: News;
+  @Prop() newsList: Array<News> = [{id: '1', title: 'title', body: 'body'}, {id: '2', title: 'qwerty', body: 'asdfg'}];
 
   deleteNewsHandler = id => {
     this.newsList = this.newsList.filter(news => news.id !== id);
   }
 
   addNews = news => {
-    console.log("news");
-    console.log(news);
-    // this.newsList.unshift(news);
     this.newsList = [...this.newsList, news]
-    console.log(this.newsList);
   }
 
   @Listen("newsAdded")
-  newsAddedHandler(e: CustomEvent<News>) {
-    // console.log(e.detail);
-    // console.log(this.news);
-    // this.news.id = e.detail.id;
-    // this.news.title = e.detail.title;
-    // this.news.body = e.detail.body;
-    // console.log(e.detail.id);
-    // const news = e.detail
+  newsAddedHandler(e: CustomEvent) {
     this.addNews(e.detail);
   }
   
