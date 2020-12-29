@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { News } from "./components/my-news/my-news";
 import { TabActivateEvent } from "./components/my-tabs/my-tab";
 export namespace Components {
     interface MyAddNews {
@@ -17,7 +16,12 @@ export namespace Components {
         "text": string;
     }
     interface MyNews {
-        "newsList": Array<News>;
+        "newsList": any;
+    }
+    interface MyNewsPage {
+        "news": any;
+    }
+    interface MyRouter {
     }
     interface MyTab {
         "active": boolean;
@@ -46,6 +50,18 @@ declare global {
         prototype: HTMLMyNewsElement;
         new (): HTMLMyNewsElement;
     };
+    interface HTMLMyNewsPageElement extends Components.MyNewsPage, HTMLStencilElement {
+    }
+    var HTMLMyNewsPageElement: {
+        prototype: HTMLMyNewsPageElement;
+        new (): HTMLMyNewsPageElement;
+    };
+    interface HTMLMyRouterElement extends Components.MyRouter, HTMLStencilElement {
+    }
+    var HTMLMyRouterElement: {
+        prototype: HTMLMyRouterElement;
+        new (): HTMLMyRouterElement;
+    };
     interface HTMLMyTabElement extends Components.MyTab, HTMLStencilElement {
     }
     var HTMLMyTabElement: {
@@ -62,6 +78,8 @@ declare global {
         "my-add-news": HTMLMyAddNewsElement;
         "my-component": HTMLMyComponentElement;
         "my-news": HTMLMyNewsElement;
+        "my-news-page": HTMLMyNewsPageElement;
+        "my-router": HTMLMyRouterElement;
         "my-tab": HTMLMyTabElement;
         "my-tabs": HTMLMyTabsElement;
     }
@@ -78,7 +96,13 @@ declare namespace LocalJSX {
         "text"?: string;
     }
     interface MyNews {
-        "newsList"?: Array<News>;
+        "newsList"?: any;
+    }
+    interface MyNewsPage {
+        "news"?: any;
+        "onNewsDeleted"?: (event: CustomEvent<any>) => void;
+    }
+    interface MyRouter {
     }
     interface MyTab {
         "active"?: boolean;
@@ -92,6 +116,8 @@ declare namespace LocalJSX {
         "my-add-news": MyAddNews;
         "my-component": MyComponent;
         "my-news": MyNews;
+        "my-news-page": MyNewsPage;
+        "my-router": MyRouter;
         "my-tab": MyTab;
         "my-tabs": MyTabs;
     }
@@ -103,6 +129,8 @@ declare module "@stencil/core" {
             "my-add-news": LocalJSX.MyAddNews & JSXBase.HTMLAttributes<HTMLMyAddNewsElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-news": LocalJSX.MyNews & JSXBase.HTMLAttributes<HTMLMyNewsElement>;
+            "my-news-page": LocalJSX.MyNewsPage & JSXBase.HTMLAttributes<HTMLMyNewsPageElement>;
+            "my-router": LocalJSX.MyRouter & JSXBase.HTMLAttributes<HTMLMyRouterElement>;
             "my-tab": LocalJSX.MyTab & JSXBase.HTMLAttributes<HTMLMyTabElement>;
             "my-tabs": LocalJSX.MyTabs & JSXBase.HTMLAttributes<HTMLMyTabsElement>;
         }

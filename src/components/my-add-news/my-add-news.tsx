@@ -31,17 +31,19 @@ export class MyAddNews {
 
   render() {
     return (
-      <form onSubmit={(e) => this.newsAddedHandler(e)}>
-      <label>
-        Title:
-        <input type="text" value={this.title} onInput={(event) => this.handleChangeTitle(event)} />
-      </label>
-      <label>
-        Content:
-        <input type="text" value={this.body} onInput={(event) => this.handleChangeBody(event)} />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      <section>
+        <form onSubmit={(e) => this.newsAddedHandler(e)}>
+          <label>
+            Title:
+            <input type="text" value={this.title} onInput={(event) => this.handleChangeTitle(event)} />
+          </label>
+          <label>
+            Content:
+            <input type="text" value={this.body} onInput={(event) => this.handleChangeBody(event)} />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
     )
   }
 }

@@ -1,29 +1,42 @@
-import { Component, h, State, Listen, Prop } from '@stencil/core';
-
-export interface News {
-  id: string;
-  title: string;
-  body: string;
-}
+import { Component, h, Listen, Prop } from '@stencil/core';
 
 @Component({
   tag: 'my-news',
   styleUrl: 'my-news.css'
 })
-export class MyNews {
-  @Prop() newsList: Array<News> = [{id: '1', title: 'title', body: 'body'}, {id: '2', title: 'qwerty', body: 'asdfg'}];
 
-  deleteNewsHandler = id => {
+export class MyNews {
+  @Prop() newsList;
+
+  fetchNews = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=3")
+    this.newsList = await response.json();
+  }
+
+  deleteNews = id => {
     this.newsList = this.newsList.filter(news => news.id !== id);
   }
 
   addNews = news => {
-    this.newsList = [...this.newsList, news]
+    this.newsList = [news, ...this.newsList]
+  }
+
+  viewNews = news => {
+    this.newsList = [news]
   }
 
   @Listen("newsAdded")
   newsAddedHandler(e: CustomEvent) {
     this.addNews(e.detail);
+  }
+
+  @Listen("newsDeleted")
+  newsDeletedHandler(e: CustomEvent) {
+    this.deleteNews(e.detail);
+  }
+
+  async componentWillLoad() {
+    await this.fetchNews();
   }
   
   render() {
@@ -31,11 +44,7 @@ export class MyNews {
       <div>
         <my-add-news></my-add-news>
         {this.newsList.map((news => 
-          <section>
-            <h3>{news.title}</h3>
-            <p>{news.body}</p>
-            <button onClick={() => this.deleteNewsHandler(news.id)}>Delete</button>
-          </section>
+          <my-news-page news={news}></my-news-page>
         ))}
       </div>
     )
