@@ -3,33 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+    <title>Stencil app</title>
 
     <script type="module" src="/build/hello-world.esm.js"></script>
     <script nomodule src="/build/hello-world.js"></script>
   </head>
   <body>
-    <!-- <my-component kind="info" text="info"></my-component>
-    <my-component kind="success" text="success"></my-component>
-    <my-component kind="error" text="error"></my-component> -->
-    <p>Have a good day</p>
-
-    <my-tabs active-tab="Tab2">
-      <my-tab name="Tab1">Tab One</my-tab>
-      <my-tab name="Tab2"><b>Tab Two</b></my-tab>
-    </my-tabs>
-    
-    <script>
-      // function handleAcknowledge(e) {
-      //   console.log(e.target.text,);
-      // }
-      // document.addEventListener("acknowledge", handleAcknowledge)
-
-      function handleTabActivate(e) {
-        console.log(e.detail.name);
-      }
-      document.addEventListener("tabActivate", handleTabActivate)
-    </script>
-
+    <my-home></my-home>
   </body>
 </html>
