@@ -1,11 +1,15 @@
 import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { href } from 'stencil-router-v2';
+import state from '../store';
+
 
 @Component({
   tag: 'my-news-page',
-  styleUrl: 'my-news-page.css'
+  styleUrl: 'my-news-page.scss'
 })
 
 export class MyNewsPage {  
+  @Prop() page: string;
   @Prop() news;
 
   @Event() newsDeleted: EventEmitter;
@@ -14,13 +18,18 @@ export class MyNewsPage {
     this.newsDeleted.emit(id);
   }
 
+  componentWillRender() {
+    this.news = state.newsList.find(news => news.id === +this.page);
+  }
+
   render() {
     return (
       <div>
         <section>
           <h3>{this.news.title}</h3>
           <p>{this.news.body}</p>
-          <button onClick={() => this.deleteNewsHandler(this.news.id)}>Delete</button>
+          <button class="btn btn--primary btn--medium btn--delete" onClick={() => this.deleteNewsHandler(this.news.id)}>Delete</button>
+          <button {...href(`/news/${this.page}`)} class="btn btn--primary btn--medium btn--view">View</button>
         </section>
       </div>
     )

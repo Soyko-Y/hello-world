@@ -1,4 +1,5 @@
-import { Component, h, Listen, Prop } from '@stencil/core';
+import { Component, h, Listen } from '@stencil/core';
+import state from '../store';
 
 @Component({
   tag: 'my-news',
@@ -6,23 +7,17 @@ import { Component, h, Listen, Prop } from '@stencil/core';
 })
 
 export class MyNews {
-  @Prop() newsList;
-
   fetchNews = async () => {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=3")
-    this.newsList = await response.json();
+    state.newsList = await response.json();
   }
 
   deleteNews = id => {
-    this.newsList = this.newsList.filter(news => news.id !== id);
+    state.newsList = state.newsList.filter(news => news.id !== id);
   }
 
   addNews = news => {
-    this.newsList = [news, ...this.newsList]
-  }
-
-  viewNews = news => {
-    this.newsList = [news]
+    state.newsList = [news, ...state.newsList]
   }
 
   @Listen("newsAdded")
@@ -43,8 +38,8 @@ export class MyNews {
     return (
       <div>
         <my-add-news></my-add-news>
-        {this.newsList.map((news => 
-          <my-news-page news={news}></my-news-page>
+        {state.newsList.map((news => 
+          <my-news-page page={news.id} />
         ))}
       </div>
     )

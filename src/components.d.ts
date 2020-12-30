@@ -5,30 +5,22 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { TabActivateEvent } from "./components/my-tabs/my-tab";
 export namespace Components {
     interface MyAddNews {
         "body": string;
         "title": string;
     }
-    interface MyComponent {
-        "kind": "info" | "success" | "error";
-        "text": string;
+    interface MyHome {
+    }
+    interface MyNavbar {
     }
     interface MyNews {
-        "newsList": any;
     }
     interface MyNewsPage {
         "news": any;
+        "page": string;
     }
     interface MyRouter {
-    }
-    interface MyTab {
-        "active": boolean;
-        "name": string;
-    }
-    interface MyTabs {
-        "activeTab": string;
     }
 }
 declare global {
@@ -38,11 +30,17 @@ declare global {
         prototype: HTMLMyAddNewsElement;
         new (): HTMLMyAddNewsElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLMyHomeElement extends Components.MyHome, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLMyHomeElement: {
+        prototype: HTMLMyHomeElement;
+        new (): HTMLMyHomeElement;
+    };
+    interface HTMLMyNavbarElement extends Components.MyNavbar, HTMLStencilElement {
+    }
+    var HTMLMyNavbarElement: {
+        prototype: HTMLMyNavbarElement;
+        new (): HTMLMyNavbarElement;
     };
     interface HTMLMyNewsElement extends Components.MyNews, HTMLStencilElement {
     }
@@ -62,26 +60,13 @@ declare global {
         prototype: HTMLMyRouterElement;
         new (): HTMLMyRouterElement;
     };
-    interface HTMLMyTabElement extends Components.MyTab, HTMLStencilElement {
-    }
-    var HTMLMyTabElement: {
-        prototype: HTMLMyTabElement;
-        new (): HTMLMyTabElement;
-    };
-    interface HTMLMyTabsElement extends Components.MyTabs, HTMLStencilElement {
-    }
-    var HTMLMyTabsElement: {
-        prototype: HTMLMyTabsElement;
-        new (): HTMLMyTabsElement;
-    };
     interface HTMLElementTagNameMap {
         "my-add-news": HTMLMyAddNewsElement;
-        "my-component": HTMLMyComponentElement;
+        "my-home": HTMLMyHomeElement;
+        "my-navbar": HTMLMyNavbarElement;
         "my-news": HTMLMyNewsElement;
         "my-news-page": HTMLMyNewsPageElement;
         "my-router": HTMLMyRouterElement;
-        "my-tab": HTMLMyTabElement;
-        "my-tabs": HTMLMyTabsElement;
     }
 }
 declare namespace LocalJSX {
@@ -90,36 +75,26 @@ declare namespace LocalJSX {
         "onNewsAdded"?: (event: CustomEvent<any>) => void;
         "title"?: string;
     }
-    interface MyComponent {
-        "kind"?: "info" | "success" | "error";
-        "onAcknowledge"?: (event: CustomEvent<any>) => void;
-        "text"?: string;
+    interface MyHome {
+    }
+    interface MyNavbar {
     }
     interface MyNews {
-        "newsList"?: any;
     }
     interface MyNewsPage {
         "news"?: any;
         "onNewsDeleted"?: (event: CustomEvent<any>) => void;
+        "page"?: string;
     }
     interface MyRouter {
     }
-    interface MyTab {
-        "active"?: boolean;
-        "name"?: string;
-        "onTabActivate"?: (event: CustomEvent<TabActivateEvent>) => void;
-    }
-    interface MyTabs {
-        "activeTab"?: string;
-    }
     interface IntrinsicElements {
         "my-add-news": MyAddNews;
-        "my-component": MyComponent;
+        "my-home": MyHome;
+        "my-navbar": MyNavbar;
         "my-news": MyNews;
         "my-news-page": MyNewsPage;
         "my-router": MyRouter;
-        "my-tab": MyTab;
-        "my-tabs": MyTabs;
     }
 }
 export { LocalJSX as JSX };
@@ -127,12 +102,11 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-add-news": LocalJSX.MyAddNews & JSXBase.HTMLAttributes<HTMLMyAddNewsElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-home": LocalJSX.MyHome & JSXBase.HTMLAttributes<HTMLMyHomeElement>;
+            "my-navbar": LocalJSX.MyNavbar & JSXBase.HTMLAttributes<HTMLMyNavbarElement>;
             "my-news": LocalJSX.MyNews & JSXBase.HTMLAttributes<HTMLMyNewsElement>;
             "my-news-page": LocalJSX.MyNewsPage & JSXBase.HTMLAttributes<HTMLMyNewsPageElement>;
             "my-router": LocalJSX.MyRouter & JSXBase.HTMLAttributes<HTMLMyRouterElement>;
-            "my-tab": LocalJSX.MyTab & JSXBase.HTMLAttributes<HTMLMyTabElement>;
-            "my-tabs": LocalJSX.MyTabs & JSXBase.HTMLAttributes<HTMLMyTabsElement>;
         }
     }
 }

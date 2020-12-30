@@ -1,4 +1,4 @@
-import { Component, h, State, Event, EventEmitter, Prop } from '@stencil/core';
+import { Component, h, Event, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
   tag: 'my-add-news',
@@ -13,7 +13,7 @@ export class MyAddNews {
   newsAddedHandler(e) {
     e.preventDefault()
     const news = {
-      id: Date.now().toString(),
+      id: +Date.now().toString(),
       title: this.title,
       body: this.body
     };
@@ -41,7 +41,7 @@ export class MyAddNews {
             Content:
             <input type="text" value={this.body} onInput={(event) => this.handleChangeBody(event)} />
           </label>
-          <button type="submit">Submit</button>
+          <button class="btn btn--primary btn--medium btn--save"type="submit">Submit</button>
         </form>
       </section>
     )
