@@ -12,7 +12,9 @@ export class MyRouter {
     return (
       <Host>
         <Router.Switch>
-          <Route path="/">
+          <Route path="/" to ="/stencil"/>
+
+          <Route path="/stencil">
             <my-news></my-news>
           </Route>
 

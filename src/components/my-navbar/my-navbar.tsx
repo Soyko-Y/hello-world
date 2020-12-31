@@ -10,7 +10,7 @@ export class MyNavbar {
   render() {
     return (
       <nav>
-        <button {...href('/')} class="btn btn--primary btn--medium btn--view">Home</button>
+        <button {...href('/stencil')} class="btn btn--primary btn--medium btn--view">Home</button>
       </nav>
     )
   }
