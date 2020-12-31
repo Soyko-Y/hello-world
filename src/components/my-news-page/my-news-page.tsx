@@ -24,14 +24,12 @@ export class MyNewsPage {
 
   render() {
     return (
-      <div>
-        <section>
-          <h3>{this.news.title}</h3>
-          <p>{this.news.body}</p>
-          <button class="btn btn--primary btn--medium btn--delete" onClick={() => this.deleteNewsHandler(this.news.id)}>Delete</button>
-          <button {...href(`/news/${this.page}`)} class="btn btn--primary btn--medium btn--view">View</button>
-        </section>
-      </div>
+      <section>
+        <h3>{this.news.title}</h3>
+        <p>{this.news.body}</p>
+        <button class="btn btn--primary btn--medium btn--delete" onClick={() => this.deleteNewsHandler(this.news.id)}>Delete</button>
+        <button {...href(`/news/${this.page}`)} class="btn btn--primary btn--medium btn--view">View</button>
+      </section>
     )
   }
 }
