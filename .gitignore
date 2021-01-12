@@ -1,6 +1,7 @@
 dist/
 www/
 loader/
+coverage/
 
 *~
 *.sw[mnpcod]
@@ -11,6 +12,7 @@ loader/
 log.txt
 *.sublime-project
 *.sublime-workspace
+*.snap
 
 .stencil/
 .idea/

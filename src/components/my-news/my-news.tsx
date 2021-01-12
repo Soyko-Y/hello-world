@@ -1,5 +1,5 @@
 import { Component, h, Listen } from '@stencil/core';
-import state from '../store';
+import state from '../store/store';
 
 @Component({
   tag: 'my-news',
